@@ -1,0 +1,6 @@
+<article
+  class="tag-cloud"
+  ng-controller="TagCloudCtrl as tagCloud"
+  ng-hide="search.hasResults() || search.queryInProgress > 0">
+  <jqcloud words="tagCloud.words" steps="7"></jqcloud>
+</article>

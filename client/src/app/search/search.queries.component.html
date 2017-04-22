@@ -1,0 +1,27 @@
+<div class="badg-container ng-cloak" ng-show="search.hasResults()">
+
+  <ul>
+    <li class="new-search-action">
+      <span>Начните </span>
+      <span
+        class="action-link"
+        title="очистить все результаты"
+        ng-click="search.clearResult()">новый поиск</span>
+    </li>
+    <li class="manage-results-label">
+      <span>или управляйте результатами: </span>
+    </li>
+    <li class="clear-result-action" ng-repeat="result in search.results">
+                        <span
+                          class="action-link"
+                          ng-click="search.clearResult(result.request.token)">
+                        <span
+                          class="glyphicon glyphicon-remove glyphicon-10 action-icon"
+                          aria-hidden="true"
+                          title="удалить результат"></span>
+                            {{result.request.token}}
+                        </span>
+    </li>
+  </ul>
+
+</div>

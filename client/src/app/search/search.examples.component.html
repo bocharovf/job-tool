@@ -1,0 +1,7 @@
+<div class="search-examples" ng-hide="search.hasResults() || search.queryInProgress > 0">
+  <span>Например сравните: </span>
+  <span
+    class="action-link ng-cloak"
+    ng-click="search.search(search.suggestion)"
+    ng-bind="search.suggestion"></span>
+</div>
