@@ -1,0 +1,82 @@
+@import "../../shared";
+
+$section-height: 450px;
+$bg-color: rgb(181,205,206); //blue
+
+.about-section {
+  background-color: $bg-color;
+  color: $color-text-primary;
+  min-height: $section-height;
+  padding: 20px 50px;
+  overflow: auto;
+
+  @media screen and (max-width: $width-move-about) {
+    padding: 0;
+  }
+}
+
+.about-image {
+  float: right;
+  width: 40%;
+
+  @media screen and (max-width: $width-move-about) {
+    float: left;
+    width: 100%;
+    clear: both;
+    margin: 10px 0 20px 0;
+  }
+
+  @media screen and (max-width: $width-no-img) {
+    display: none;
+  }
+
+  img {
+    width: $about-img-width;
+    height: $about-img-height;
+    margin: 0 auto;
+    display: block;
+
+    @media screen and (max-width: $width-move-about) {
+      max-width: $about-img-width;
+      max-height: $about-img-height;
+      width: 100%;
+      padding: 0 10px 0 10px;
+    }
+  }
+}
+
+.devise {
+  float: left;
+  width: 60%;
+  font-size: 22px;
+
+  @media screen and (max-width: $width-move-about) {
+    width: 100%;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 55px;
+    font-family: 'Play', sans-serif;
+
+    @media screen and (max-width: $width-move-about) {
+      font-size: 40px;
+    }
+  }
+
+}
+
+.devise-phrase {
+  font-style: italic;
+  font-size: 15px;
+  margin: 0 0 50px 0;
+
+  @media screen and (max-width: $width-move-about) {
+    margin: 0 0 10px 0;
+  }
+}
+
+.devise-key {
+  color: #de5842;
+  font-weight: bold;
+}
