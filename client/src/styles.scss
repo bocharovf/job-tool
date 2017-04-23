@@ -1,0 +1,8 @@
+@import "./shared.scss";
+
+body {
+  padding-top: $headerHeight;
+  @media screen and (max-width: $widthNavCollapsed) {
+    padding-top: $headerHeightCollapsed;
+  }
+}
