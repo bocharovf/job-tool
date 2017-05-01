@@ -1,0 +1,10 @@
+@import "../../shared";
+
+:host {
+  float: right;
+  padding: 28px 10px 0 0;
+
+  @media screen and (max-width: $widthNavCollapsed) {
+    padding: 20px 10px;
+  }
+}

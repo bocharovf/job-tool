@@ -1,43 +1,31 @@
 <header>
 
-  <div class="logo">
-    <img src="assets/logo90x90.png" alt="job.bocharovf.ru">
-  </div>
+  <app-logo [src]="'assets/logo90x90.png'" [alt]="'job.bocharovf.ru'"></app-logo>
 
-  <nav class="navigation">
-    <ul>
-      <li class="mobile-hidden">
-        <span class="nav-link">О проекте</span>
-      </li>
-      <li class="mobile-hidden">
-        <span class="nav-link">Поиск</span>
-      </li>
-
-      <li class="desktop-hidden">
-        <span class="glyphicon glyphicon-education nav-icon">
-        </span>
-      </li>
-      <li class="desktop-hidden">
-        <span class="glyphicon glyphicon-search nav-icon">
-        </span>
-      </li>
-    </ul>
+  <nav appNavigation>
+    <li appMenuItem [text]="'О проекте'" [icon]="'glyphicon-education'"></li>
+    <li appMenuItem [text]="'Поиск'" [icon]="'glyphicon-search'"></li>
   </nav>
 
-  <div class="social mobile-hidden">
-    <span class='st_facebook_large' displayText='Facebook'></span>
-    <span class='st_twitter_large' displayText='Tweet'></span>
-    <span class='st_linkedin_large' displayText='LinkedIn'></span>
-    <span class='st_googleplus_large' displayText='Google +'></span>
-    <span class='st_vkontakte_large' displayText='Vkontakte'></span>
-  </div>
+  <app-social
+    [publisher]="'fb8811d3-6073-4a6f-a086-17c426dc326f'"
+    [publisherGA]="'UA-46635392-1'">
 
-  <div class="social desktop-hidden">
-    <span class='st_facebook' displayText=''></span>
-    <span class='st_twitter' displayText=''></span>
-    <span class='st_linkedin' displayText=''></span>
-    <span class='st_googleplus' displayText=''></span>
-    <span class='st_vkontakte' displayText=''></span>
-  </div>
+    <div class="mobile-hidden">
+      <app-social-item [displayText]="'Facebook'" [socialNetwork]="'facebook'" [isLarge]="true"></app-social-item>
+      <app-social-item [displayText]="'Tweet'" [socialNetwork]="'twitter'" [isLarge]="true"></app-social-item>
+      <app-social-item [displayText]="'LinkedIn'" [socialNetwork]="'linkedin'" [isLarge]="true" ></app-social-item>
+      <app-social-item [displayText]="'Google +'" [socialNetwork]="'googleplus'" [isLarge]="true" ></app-social-item>
+      <app-social-item [displayText]="'Vkontakte'" [socialNetwork]="'vkontakte'" [isLarge]="true"></app-social-item>
+    </div>
+
+    <div class="desktop-hidden">
+      <app-social-item [socialNetwork]="'facebook'"></app-social-item>
+      <app-social-item [socialNetwork]="'twitter'"></app-social-item>
+      <app-social-item [socialNetwork]="'linkedin'" ></app-social-item>
+      <app-social-item [socialNetwork]="'googleplus'" ></app-social-item>
+      <app-social-item [socialNetwork]="'vkontakte'"></app-social-item>
+    </div>
+  </app-social>
 
 </header>

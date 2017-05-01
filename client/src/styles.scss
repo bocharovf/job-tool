@@ -6,3 +6,28 @@ body {
     padding-top: $headerHeightCollapsed;
   }
 }
+
+
+.desktop-hidden-inline {
+  display: none;
+}
+
+.desktop-hidden {
+  display: none;
+}
+
+@media screen and (max-width: $widthNavCollapsed) {
+
+  .mobile-hidden {
+    display: none;
+  }
+
+  .desktop-hidden {
+    display: inherit;
+  }
+
+  .desktop-hidden-inline {
+    display: inline;
+  }
+
+}
