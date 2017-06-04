@@ -3,7 +3,11 @@
   <div style="display: flex; justify-content: center; margin: 40px 0 0 0;">
 
     <div style="display: flex; width: 50%;">
-      <search-input></search-input>
+      <search-input
+        [words]="['robin', 'robust', 'rikon']"
+        (search)="onSearch($event)"
+      >
+      </search-input>
     </div>
 
     <div style="display: flex;">

@@ -7,4 +7,8 @@ import {Component} from '@angular/core';
 })
 export class StatisticsSectionComponent {
 
+  public onSearch(text) {
+    console.log('search for', text);
+  }
+
 }

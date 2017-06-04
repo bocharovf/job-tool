@@ -5,10 +5,21 @@
     type="text"
     class="form-control"
     placeholder="Язык, платформа, фреймворк ..."
+    [typeahead]="dataSource"
+    [typeaheadSingleWords]="true"
+    [typeaheadWordDelimiters]="','"
+    [typeaheadPhraseDelimiters]="','"
+    (typeaheadOnSelect)="onSelect($event)"
+    (keyup.enter)="onEnter($event)"
+    [(ngModel)]="selected"
   >
 
   <span class="input-group-btn">
-      <button class="btn btn-primary" type="button">
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="onSearchBtnClick($event)"
+      >
         <span class="glyphicon glyphicon-search"></span>
         <!--<img src="images/loading.gif" />-->
       </button>

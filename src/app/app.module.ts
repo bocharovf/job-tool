@@ -11,7 +11,6 @@ import { AboutSectionComponent } from './sections/about.component';
 import { StartupSectionComponent } from './sections/startup.component';
 import { StatisticsSectionComponent } from './sections/statistics.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
