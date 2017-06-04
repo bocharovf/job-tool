@@ -1,26 +1,16 @@
-<div class="input-group">
+<div class="input-group input-group-lg">
 
   <input
     id="searchBox"
     type="text"
     class="form-control"
+    placeholder="Язык, платформа, фреймворк ..."
+  >
 
-    tooltip-trigger="focus"
-    tooltip-enable="!search.isAnyRequestDone"
-    tooltip-placement="top"
-    uib-tooltip="Вы можете искать несколько названий сразу, разделяя их запятыми!"
-
-    ng-attr-placeholder="{{search.placeholder()}}"
-    ng-model="search.query"
-    ng-keypress="search.searchOnEnter($event)"
-    ng-focus="search.showTooltip()"
-    ng-blur="search.hideTooltip()">
   <span class="input-group-btn">
-      <button class="btn btn-primary" type="button" ng-click="search.search(search.query)">
-        <span
-          ng-bind="search.buttonText()"
-          ng-show="search.queryInProgress == 0"></span>
-        <img src="images/loading.gif" ng-show="search.queryInProgress > 0" />
+      <button class="btn btn-primary" type="button">
+        <span class="glyphicon glyphicon-search"></span>
+        <!--<img src="images/loading.gif" />-->
       </button>
     </span>
 </div>

@@ -2,29 +2,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MenuModule } from './menu/menu.module';
+import { SearchModule } from './search/search.module';
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './sections/menu.component';
-import { AboutComponent } from './sections/about.component';
-import { StartupComponent } from './sections/startup.component';
-import { StatisticsComponent } from './sections/statistics.component';
-import { MenuItemComponent } from './menu/menu-item.component';
-import { NavigationComponent } from './menu/navigation.component';
-import { LogoComponent } from './menu/logo.component';
-import { SocialComponent } from './menu/social.component';
-import { SocialItemComponent } from './menu/social-item.component';
+import { MenuSectonComponent } from './sections/menu.component';
+import { AboutSectionComponent } from './sections/about.component';
+import { StartupSectionComponent } from './sections/startup.component';
+import { StatisticsSectionComponent } from './sections/statistics.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent, AboutComponent, StartupComponent,
-    NavigationComponent, LogoComponent, MenuItemComponent,
-    SocialComponent, SocialItemComponent
+    MenuSectonComponent,
+    AboutSectionComponent,
+    StartupSectionComponent,
+    StatisticsSectionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MenuModule,
+    SearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

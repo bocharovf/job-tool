@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'app-search-queries',
+    selector: 'search-queries',
     templateUrl: './search.queries.component.html',
     styleUrls: ['search.queries.component.scss']
 })

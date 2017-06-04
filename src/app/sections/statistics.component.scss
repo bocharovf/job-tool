@@ -1,0 +1,16 @@
+@import "../../shared";
+
+$section-height: 700px;
+$demoChartSize: 200px;
+
+.search-section {
+  width: 100%;
+  height: $section-height;
+  padding: 50px 5%;
+  color: $color-text-primary;
+  background-color: rgb(237,237,234);
+
+  @media screen and (max-width: $widthMobile) {
+    padding: 20px 5%;
+  }
+}

@@ -3,7 +3,7 @@ import {Component, Input, AfterViewInit} from '@angular/core';
 declare var stLight: any;
 
 @Component({
-    selector: 'app-social',
+    selector: 'menu-social',
     template: `<ng-content></ng-content>`,
     styleUrls: ['social.component.scss']
 })

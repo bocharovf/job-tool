@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'app-startup',
+    selector: 'app-startup-section',
     templateUrl: './startup.component.html',
     styleUrls: ['startup.component.scss']
 })
-export class StartupComponent {
+export class StartupSectionComponent {
 
 }

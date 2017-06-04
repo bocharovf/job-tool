@@ -4,10 +4,10 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-menu-section',
   templateUrl: './menu.component.html',
   styleUrls: ['menu.component.scss']
 })
-export class MenuComponent {
+export class MenuSectonComponent {
 
 }

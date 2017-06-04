@@ -1,7 +1,7 @@
 import { Component, Input} from '@angular/core';
 
 @Component({
-    selector: 'li[appMenuItem]',
+    selector: 'li[menuItem]',
     template: `
         <span class="mobile-hidden nav-link">{{text}}</span>
         <span class="desktop-hidden nav-icon glyphicon" [ngClass]="icon">
