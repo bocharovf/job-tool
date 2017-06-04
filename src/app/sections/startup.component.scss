@@ -1,0 +1,24 @@
+@import "../../shared";
+
+$section-height: 140px;
+$bg-color: rgb(237,237,234);
+$text-color: rgb(255,255,255);
+
+.startup-section {
+  width: 100%;
+  background-color: $bg-color;
+  color: $text-color;
+  min-height: $section-height;
+  padding: 10px;
+  overflow: auto;
+
+  background-image: url($img-path + "startup-bg.png");
+
+  h1 {
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    font-family: 'Play', sans-serif;
+  }
+
+}
