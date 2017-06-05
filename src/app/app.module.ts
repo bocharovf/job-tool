@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MenuModule } from './menu/menu.module';
 import { SearchModule } from './search/search.module';
+import { FilterModule } from './filter/filter.module';
 
 import { AppComponent } from './app.component';
 import { MenuSectonComponent } from './sections/menu.component';
@@ -24,7 +25,8 @@ import { StatisticsSectionComponent } from './sections/statistics.component';
     FormsModule,
     HttpModule,
     MenuModule,
-    SearchModule
+    SearchModule,
+    FilterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -43,7 +43,8 @@ export class SearchInputComponent {
 
   private getStatesAsObservable(token: string): Observable<any> {
     return Observable.of(
-      this.words.filter((state: string) => state.startsWith(token))
+      this.words.filter((state: string) => state.toLowerCase()
+                                                .startsWith(token.toLowerCase()))
     );
   }
 

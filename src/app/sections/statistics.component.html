@@ -1,19 +1,29 @@
 <section id="searchSection" class="search-section">
 
-  <div style="display: flex; justify-content: center; margin: 40px 0 0 0;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 40px 0 0 0; width: 100%">
 
     <div style="display: flex; width: 50%;">
       <search-input
         [words]="['robin', 'robust', 'rikon']"
-        (search)="onSearch($event)"
-      >
+        (search)="onSearch($event)">
       </search-input>
     </div>
 
-    <div style="display: flex;">
-      <!--<filter-autocomplete></filter-autocomplete>
-      <filter-dropdown></filter-dropdown>-->
-    </div>
+    <div style="display: flex; width: 100%; margin: 15px 0 0 0"></div>
+
+      <filter-autocomplete
+        style="width: 150px; margin: 15px 100px 0 0"
+        [placeholder]="'Город'"
+        [items]="areas"
+        (selectedChange)="onAreaSelected($event)">
+      </filter-autocomplete>
+
+      <filter-dropdown
+        style="width: 150px; margin: 15px 0 0 0"
+        [items]="experience"
+        [selected]="selectedExperience"
+        (selectedChange)="onExperienceSelected($event)">
+      </filter-dropdown>
 
   </div>
 
