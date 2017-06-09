@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {FilterItem} from "./FilterItem";
 
 @Component({
     selector: 'filter-dropdown',
@@ -7,10 +8,14 @@ import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
   <button dropdownToggle 
     type="button"
     style="width: 100%"
-    class="btn dropdown-toggle">
-    {{selected ? selected[displayName] : ''}} <span class="caret"></span>
+    class="btn dropdown-toggle"
+    [class.btn-primary]="selected">
+    {{title}}: {{selected ? selected[displayName] : defaultItem}} <span class="caret"></span>
   </button>
   <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li role="menuitem">
+      <a class="dropdown-item" (click)="onSelected(null)">{{defaultItem}}</a>
+    </li>
     <li *ngFor="let item of items" role="menuitem">
       <a class="dropdown-item" (click)="onSelected(item)">{{item[displayName]}}</a>
      </li>
@@ -20,13 +25,15 @@ import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
   styles: ['a.dropdown-item { cursor: pointer }']
 })
 export class DropdownComponent {
-  @Input() items: any[];
+  @Input() items: FilterItem[];
   @Input() displayName: string = 'name';
+  @Input() title: string = '';
+  @Input() defaultItem: string = '';
 
-  @Input() selected:any;
-  @Output() selectedChange = new EventEmitter<any>();
+  @Input() selected:FilterItem;
+  @Output() selectedChange = new EventEmitter<FilterItem>();
 
-  onSelected(item: any) {
+  onSelected(item: FilterItem) {
     this.selected = item;
     this.selectedChange.emit(item);
   }

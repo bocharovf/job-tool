@@ -4,6 +4,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import {TypeaheadMatch} from "ngx-bootstrap";
 import 'rxjs/add/observable/of';
+import {FilterItem} from "./FilterItem";
 
 @Component({
     selector: 'filter-autocomplete',
@@ -12,9 +13,10 @@ import 'rxjs/add/observable/of';
     *ngIf="!edit" 
     type="button" 
     class="btn"
+    [class.btn-primary]="selected"
     style="width: 100%;"
     (click)="onPreviewClick($event)">
-    {{selected ? selected : placeholder}} <span class="glyphicon glyphicon-globe"></span>
+    {{selected ? selected.name : title}} <span class="glyphicon glyphicon-globe"></span>
   </button>
   
   <input
@@ -23,23 +25,22 @@ import 'rxjs/add/observable/of';
     type="text"
     class="form-control"
     style="width: 100%; text-align: center;"
-    [placeholder]="placeholder"
+    [placeholder]="title"
     [typeahead]="dataSource"
-    [typeaheadOptionField]="displayName"
+    [typeaheadOptionField]="'name'"
     (typeaheadOnSelect)="onSelect($event)"
     (blur)="onBlur()"
     [(ngModel)]="selected" />
 `
 })
 export class AutocompleteComponent implements AfterViewChecked{
-  @Input() placeholder: string;
-  @Input() items: any[];
-  @Input() displayName: string = 'name';
+  @Input() title: string;
+  @Input() items: FilterItem[];
 
-  @Output() selectedChange = new EventEmitter<any>();
+  @Output() selectedChange = new EventEmitter<FilterItem>();
 
-  private selected:any;
-  private dataSource: Observable<any>;
+  @Input() selected:FilterItem;
+  private dataSource: Observable<FilterItem>;
   private edit: boolean;
 
   @ViewChild('input') private el:ElementRef;
@@ -73,7 +74,7 @@ export class AutocompleteComponent implements AfterViewChecked{
   private getStatesAsObservable(token: string): Observable<any> {
     return Observable.of(
       this.items.filter(
-        (state: any) => state[this.displayName]
+        (state: FilterItem) => state.name
                           .toLowerCase()
                           .startsWith(token.toLowerCase())
       )
