@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: 'app-progress',
+    selector: 'result-progress',
     templateUrl: './progress.component.html',
     styleUrls: ['progress.component.scss']
 })
 export class ProgressComponent {
-
+  @Input() displayText: string;
 }
