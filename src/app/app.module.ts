@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { MenuModule } from './menu/menu.module';
 import { SearchModule } from './search/search.module';
 import { FilterModule } from './filter/filter.module';
+import { ResultsModule } from './result/results.module';
 
 import { AppComponent } from './app.component';
 import { MenuSectonComponent } from './sections/menu.component';
@@ -26,7 +27,8 @@ import { StatisticsSectionComponent } from './sections/statistics.component';
     HttpModule,
     MenuModule,
     SearchModule,
-    FilterModule
+    FilterModule,
+    ResultsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

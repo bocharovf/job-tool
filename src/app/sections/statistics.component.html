@@ -12,27 +12,33 @@
     <div style="display: flex; width: 100%; margin: 15px 0 0 0"></div>
 
       <filter-autocomplete
-        style="width: 150px; margin: 15px 100px 0 0"
-        [placeholder]="'Город'"
-        [items]="areas"
-        (selectedChange)="onAreaSelected($event)">
+        style="width: 200px; margin: 15px 100px 0 0"
+        [title]="'Город'"
+        [items]="areas | async"
+        [(selected)]="selectedArea">
       </filter-autocomplete>
 
       <filter-dropdown
-        style="width: 150px; margin: 15px 0 0 0"
-        [items]="experience"
-        [selected]="selectedExperience"
-        (selectedChange)="onExperienceSelected($event)">
+        style="width: 200px; margin: 15px 0 0 0"
+        [items]="experiences | async"
+        [(selected)]="selectedExperience"
+        [title]="'Опыт'"
+        [defaultItem]="'Любой'">
       </filter-dropdown>
+
+    <div style="display: flex; width: 100%; margin: 15px 0 0 0"></div>
+
+    <result-progress
+      *ngIf="inProgress | async"
+      [displayText] = "'Выполняется запрос...'">
+    </result-progress>
 
   </div>
 
 
-  <!--<filter></filter>
 
-  <progress></progress>
 
-  <not-found></not-found>
+  <!--<not-found></not-found>
 
   <tag-cloud></tag-cloud>
 

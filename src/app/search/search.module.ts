@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-
+import { SearchService } from './search.service';
 import { SearchInputComponent } from './search.input.component';
+import {DictionaryService} from "./dictionary.service";
 
 const components = [
   SearchInputComponent
@@ -16,7 +17,7 @@ const components = [
     FormsModule,
     TypeaheadModule.forRoot()
   ],
-  providers: [],
+  providers: [SearchService, DictionaryService],
   exports: components
 })
 export class SearchModule { }

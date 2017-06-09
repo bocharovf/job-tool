@@ -1,4 +1,8 @@
 import {Component} from '@angular/core';
+import {SearchService} from '../search/search.service';
+import {Observable} from 'rxjs';
+import {ExperienceItem, AreaItem} from "hh-stats";
+import {DictionaryService} from "../search/dictionary.service";
 
 @Component({
     selector: 'app-statistics-section',
@@ -7,23 +11,41 @@ import {Component} from '@angular/core';
 })
 export class StatisticsSectionComponent {
 
-  public areas = [{name:'Москва', id:1}, {name:'Екатеринбург', id: 2}];
-  public experience = [{name: 'Без опыта', id:1}, {name: 'Более 1 года', id:2}];
-  public selectedExperience: any;
+  areas1 = [{name:'Москва', id:1}, {name:'Екатеринбург', id: 2}];
+  areas: Observable<AreaItem[]>;
+  experiences: Observable<ExperienceItem[]>;
+  selectedExperience: ExperienceItem;
+  selectedArea: AreaItem;
 
-  constructor() {
-    this.selectedExperience = this.experience[0];
+  inProgress: Observable<boolean>;
+
+  constructor(
+    private searchService: SearchService,
+    private dictionaryService: DictionaryService
+  ) {
+
+    this.experiences = this.dictionaryService.experiences;
+    this.areas = this.dictionaryService.areas;
+
+    this.inProgress = this.searchService.queriesOnAir.map(amount => amount > 0);
+
+    let myLog2 = this.searchService.queriesOnAir.do(x=>console.log('onAir',x));
+    myLog2.subscribe();
+
+    let myLog = this.searchService.results.do(x=>console.log('myLog',x));
+    myLog.subscribe();
   }
 
-  public onSearch(text) {
+  onSearch(text) {
     console.log('search for', text);
+    this.searchService.addSearch(['java'], '1', 'noExperience');
   }
 
-  public onAreaSelected(area) {
+  onAreaSelected(area) {
     console.log('area', area);
   }
 
-  public onExperienceSelected(experience) {
-    console.log('experience', experience);
+  onExperienceSelected(experience) {
+    console.log('experiences', experience);
   }
 }
