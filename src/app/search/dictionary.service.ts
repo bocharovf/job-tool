@@ -3,9 +3,8 @@
  */
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HeadHunterApi, ExperienceItem, AreaItem} from "hh-stats";
+import {HeadHunterApi, AreaItem} from "hh-stats";
 import {FilterItem} from "../filter/FilterItem";
-import {map} from "rxjs/operator/map";
 
 const USER_AGENT = 'job-tool, contact bocharovf@gmail.com';
 const TIMEOUT = 2000;
@@ -15,7 +14,6 @@ export class DictionaryService {
 
   areas: Observable<FilterItem[]>;
   experiences: Observable<FilterItem[]>;
-  areasFlat: Observable<FilterItem[]>;
 
   private api = new HeadHunterApi(USER_AGENT, TIMEOUT);
 
@@ -34,7 +32,7 @@ export class DictionaryService {
   /**
    * Convert hierarchical tree of areas to flat array of filter items
    * @param areasTree areas tree
-   * @returns {AreaItem[]} flat array of areas
+   * @returns {FilterItem[]} flat array of areas
    */
   private static areasTree2FlatArray(areasTree: AreaItem[]): FilterItem[]{
     let stack: {area: AreaItem, level: number, group: string}[];
