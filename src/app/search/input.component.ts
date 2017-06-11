@@ -5,8 +5,8 @@ import 'rxjs/add/observable/of';
 
 @Component({
     selector: 'search-input',
-    templateUrl: './search.input.component.html',
-    styleUrls: ['search.input.component.scss']
+    templateUrl: 'input.component.html',
+    styleUrls: ['input.component.scss']
 })
 export class SearchInputComponent {
   @Input() public words:string[];
