@@ -10,7 +10,9 @@ import {FilterItem} from "./FilterItem";
     style="width: 100%"
     class="btn dropdown-toggle"
     [class.btn-primary]="selected">
-    {{title}}: {{selected ? selected[displayName] : defaultItem}} <span class="caret"></span>
+    <span class="btn-content">{{title}}: {{selected ? selected[displayName] : defaultItem}} 
+      <span class="caret"></span>
+    </span>
   </button>
   <ul *dropdownMenu class="dropdown-menu" role="menu">
     <li role="menuitem">
@@ -22,7 +24,10 @@ import {FilterItem} from "./FilterItem";
   </ul>
 </div>  
 `,
-  styles: ['a.dropdown-item { cursor: pointer }']
+  styles: [
+    'a.dropdown-item { cursor: pointer }',
+    '.btn-content { text-overflow: ellipsis; overflow: hidden; display: block; }'
+  ]
 })
 export class DropdownComponent {
   @Input() items: FilterItem[];

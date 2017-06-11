@@ -16,7 +16,10 @@ import {FilterItem} from "./FilterItem";
     [class.btn-primary]="selected"
     style="width: 100%;"
     (click)="onPreviewClick($event)">
-    {{selected ? selected.name : title}} <span class="glyphicon glyphicon-globe"></span>
+      <span class="btn-content">
+        <span class="glyphicon glyphicon-globe"></span> 
+        {{selected ? selected.name : title}}
+      </span>
   </button>
   
   <input
@@ -31,7 +34,8 @@ import {FilterItem} from "./FilterItem";
     (typeaheadOnSelect)="onSelect($event)"
     (blur)="onBlur()"
     [(ngModel)]="selected" />
-`
+`,
+  styles: ['.btn-content { text-overflow: ellipsis; overflow: hidden; display: block; }']
 })
 export class AutocompleteComponent implements AfterViewChecked{
   @Input() title: string;
@@ -47,7 +51,7 @@ export class AutocompleteComponent implements AfterViewChecked{
 
   constructor() {
     this.dataSource = Observable.create(
-      (observer: any) => observer.next(this.selected)
+      (observer: any) => observer.next(this.selected || '')
     ).mergeMap((token: string) =>
       this.getStatesAsObservable(token));
   }
