@@ -2,11 +2,20 @@
 
   <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 40px 0 0 0; width: 100%">
 
-    <div style="display: flex; width: 50%;">
+    <div style="width: 50%;">
+
       <search-input
+        style="float: left; clear: right"
         [words]="['robin', 'robust', 'rikon']"
         (search)="onSearch($event)">
       </search-input>
+
+      <search-example
+        style="float: left;"
+        (onSearch)="onSearch($event)"
+        [example]="'java, c#, python'">
+      </search-example>
+
     </div>
 
     <div style="display: flex; width: 100%; margin: 15px 0 0 0"></div>
@@ -15,7 +24,9 @@
         style="width: 200px; margin: 15px 100px 0 0"
         [title]="'Город'"
         [items]="areas | async"
-        [(selected)]="selectedArea">
+        [(selected)]="selectedArea"
+        (selectedChange)="onAreaSelected($event)"
+      >
       </filter-autocomplete>
 
       <filter-dropdown

@@ -3,6 +3,7 @@ import {SearchService} from '../search/search.service';
 import {Observable} from 'rxjs';
 import {ExperienceItem, AreaItem} from "hh-stats";
 import {DictionaryService} from "../search/dictionary.service";
+import {FilterItem} from "../filter/FilterItem";
 
 @Component({
     selector: 'app-statistics-section',
@@ -11,34 +12,27 @@ import {DictionaryService} from "../search/dictionary.service";
 })
 export class StatisticsSectionComponent {
 
-  areas1 = [{name:'Москва', id:1}, {name:'Екатеринбург', id: 2}];
-  areas: Observable<AreaItem[]>;
-  experiences: Observable<ExperienceItem[]>;
-  selectedExperience: ExperienceItem;
-  selectedArea: AreaItem;
-
+  areas: Observable<FilterItem[]>;
+  experiences: Observable<FilterItem[]>;
   inProgress: Observable<boolean>;
+
+  selectedExperience: FilterItem = null;
+  selectedArea: FilterItem = null;
 
   constructor(
     private searchService: SearchService,
     private dictionaryService: DictionaryService
   ) {
-
     this.experiences = this.dictionaryService.experiences;
     this.areas = this.dictionaryService.areas;
-
     this.inProgress = this.searchService.queriesOnAir.map(amount => amount > 0);
-
-    let myLog2 = this.searchService.queriesOnAir.do(x=>console.log('onAir',x));
-    myLog2.subscribe();
-
-    let myLog = this.searchService.results.do(x=>console.log('myLog',x));
-    myLog.subscribe();
   }
 
   onSearch(text) {
-    console.log('search for', text);
-    this.searchService.addSearch(['java'], '1', 'noExperience');
+    let areaId = this.selectedArea ? this.selectedArea.id : null;
+    let experienceId = this.selectedExperience ? this.selectedExperience.id : null;
+    console.log('search for %s in area %s with experience %s', text, areaId, experienceId);
+    this.searchService.addSearch([text], areaId, experienceId);
   }
 
   onAreaSelected(area) {
