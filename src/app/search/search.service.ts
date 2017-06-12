@@ -93,17 +93,17 @@ export class SearchService {
       })
       .do(() => this.onAir.next(-1))
       .do(
-        stat => this.newResults.next(new SearchModel(stat))
+        stat => this.newResults.next(new SearchModel(stat, keywords.join(',')))
       )
       .subscribe();
   }
 
   /**
    * Remove particular search result from results
-   * @param stat result to remove
+   * @param query result to remove
    */
-  removeSearch(stat: SearchModel): void {
-    this.removeResults.next(stat);
+  removeSearch(query: SearchModel): void {
+    this.removeResults.next(query);
   }
 
 }
