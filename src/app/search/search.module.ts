@@ -6,9 +6,11 @@ import { SearchService } from './search.service';
 import { SearchInputComponent } from './input.component';
 import { SearchExampleComponent } from './example.component';
 import { DictionaryService } from "./dictionary.service";
+import {SearchQueriesComponent} from "./queries.component";
 
 const components = [
-  SearchInputComponent, SearchExampleComponent
+  SearchInputComponent, SearchExampleComponent,
+  SearchQueriesComponent
   ];
 
 @NgModule({
