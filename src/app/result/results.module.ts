@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ProgressComponent } from './progress.component';
+import { TagCloudComponent } from './tag-cloud.component';
 
 const components = [
-  ProgressComponent
+  ProgressComponent, TagCloudComponent
 ];
 
 @NgModule({

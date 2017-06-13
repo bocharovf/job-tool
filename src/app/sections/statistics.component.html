@@ -18,7 +18,7 @@
 
     </div>
 
-    <div style="display: flex; width: 100%; margin: 15px 0 0 0"></div>
+    <div style="width: 100%; margin: 15px 0 0 0"></div>
 
       <filter-autocomplete
         style="width: 200px; margin: 15px 100px 0 0"
@@ -37,7 +37,7 @@
         [defaultItem]="'Любой'">
       </filter-dropdown>
 
-    <div style="display: flex; width: 100%; margin: 15px 0 0 0"></div>
+    <div style="width: 100%; margin: 50px 0 0 0"></div>
 
     <search-queries
       (removeQuery)="onRemoveQuery($event)"
@@ -49,15 +49,16 @@
       [displayText] = "'Выполняется запрос...'">
     </result-progress>
 
+    <div style="width: 100%; margin: 15px 0 0 0"></div>
+
+    <div resultTagCloud
+         *ngIf="!(inProgress | async) && !(hasResults | async)"
+         [words]="cloudTags"
+         [height]="300"
+         (tagClick)="onSearch($event.text)"></div>
   </div>
 
-
-
-
   <!--<not-found></not-found>
-
-  <tag-cloud></tag-cloud>
-
   <charts></charts>-->
 
 </section>
