@@ -44,11 +44,6 @@
       [queries]="results | async">
     </search-queries>
 
-    <result-progress
-      *ngIf="inProgress | async"
-      [displayText] = "'Выполняется запрос...'">
-    </result-progress>
-
     <div style="width: 100%; margin: 15px 0 0 0"></div>
 
     <div resultTagCloud
@@ -56,8 +51,25 @@
          [words]="cloudTags"
          [height]="300"
          (tagClick)="onSearch($event.text)"></div>
-  </div>
 
+    <result-table-view
+      style="max-width: 500px; margin: 15px 0 0 0"
+      *ngIf="hasResults | async"
+      [results]="results | async">
+    </result-table-view>
+
+    <result-progress
+      style="width: 100%"
+      *ngIf="inProgress | async"
+      [displayText] = "'Выполняется запрос...'">
+    </result-progress>
+
+    <result-error
+      [error]="error | async"
+      (dismiss)="onDismiss()">
+    </result-error>
+
+  </div>
   <!--<not-found></not-found>
   <charts></charts>-->
 

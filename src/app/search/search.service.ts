@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {Subject, Observable} from 'rxjs';
 import {SearchModel} from './SearchModel';
 import {HeadHunterApi, CurrencyConverter, DictCurrencyConverter} from "hh-stats";
+import {FilterItem} from "../filter/FilterItem";
 
 /**
  * SearchModel Operation contract
@@ -17,7 +18,7 @@ interface ISearchOperation extends Function {
 
 const INITIAL_RESULTS = new Array<SearchModel>();
 const USER_AGENT = 'job-tool, contact bocharovf@gmail.com';
-const TIMEOUT = 2000;
+const TIMEOUT = 3000;
 
 @Injectable()
 export class SearchService {
@@ -48,17 +49,23 @@ export class SearchService {
 
     this.currencyConverter = Observable
                                 .fromPromise(this.api.getCurrencies())
+                                .retry(2)
                                 .map(
                                   (currencies) => new DictCurrencyConverter(currencies)
                                 );
     this.currencyConverter.subscribe();
 
-    this.queriesOnAir = this.onAir.scan((acc, one) => acc + one, 0);
+    this.queriesOnAir = this.onAir
+                        .scan((acc, one) => acc + one, 0)
+                        .publishReplay(1)
+                        .refCount();
 
     this.results = this.updates
                       .scan(
                         (results: SearchModel[], operation: ISearchOperation) => operation(results),
-                        INITIAL_RESULTS);
+                        INITIAL_RESULTS)
+                      .publishReplay(1)
+                      .refCount();
 
     this.newResults
       .map(result =>
@@ -84,18 +91,22 @@ export class SearchService {
    * @param area Area to search in
    * @param experience Experience to search for
    */
-  addSearch(keywords: string[], area: string, experience: string) {
-    this.currencyConverter
-      .do(() => this.onAir.next(1))
-      .flatMap(converter => {
-        let query = this.api.getVacancy(converter, keywords, area, experience);
-        return Observable.fromPromise(query);
-      })
-      .do(() => this.onAir.next(-1))
-      .do(
-        stat => this.newResults.next(new SearchModel(stat, keywords.join(',')))
-      )
-      .subscribe();
+  addSearch(keywords: string[], area: FilterItem, experience: FilterItem) {
+    let areaId = area ? area.id : null;
+    let experienceId = experience ? experience.id : null;
+
+    return this.currencyConverter
+        .do(() => this.onAir.next(1))
+        .flatMap(converter => {
+          let query = this.api.getVacancy(converter, keywords, areaId, experienceId);
+          return Observable.fromPromise(query);
+        })
+        .retry(2)
+        .do(stat => {
+          let result = new SearchModel(stat, keywords.join(','), experience, area);
+          this.newResults.next(result);
+        })
+        .finally(() => this.onAir.next(-1));
   }
 
   /**

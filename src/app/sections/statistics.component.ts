@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, Query} from '@angular/core';
 import {SearchService} from '../search/search.service';
-import {Observable} from 'rxjs';
+import {Observable, Subject, BehaviorSubject} from 'rxjs';
 import {ExperienceItem, AreaItem} from "hh-stats";
 import {DictionaryService} from "../search/dictionary.service";
 import {FilterItem} from "../filter/FilterItem";
 import {SearchModel} from "../search/SearchModel";
 import {CloudTag} from "../result/CloudTag";
+import {QueryError} from "../result/QueryError";
 
 @Component({
     selector: 'app-statistics-section',
@@ -19,6 +20,8 @@ export class StatisticsSectionComponent {
   inProgress: Observable<boolean>;
   results: Observable<SearchModel[]>;
   hasResults: Observable<boolean>;
+
+  error = new BehaviorSubject<Error>(null);
 
   selectedExperience: FilterItem = null;
   selectedArea: FilterItem = null;
@@ -35,18 +38,21 @@ export class StatisticsSectionComponent {
   ) {
     this.experiences = this.dictionaryService.experiences;
     this.areas = this.dictionaryService.areas;
+
     this.inProgress = this.searchService.queriesOnAir.map(amount => amount > 0);
     this.results = this.searchService.results;
     this.hasResults = this.results.map(results => results.length > 0);
   }
 
   onSearch(text) {
-    let areaId = this.selectedArea ? this.selectedArea.id : null;
-    let experienceId = this.selectedExperience ? this.selectedExperience.id : null;
-
     for (let token of text.split(',').map(t => t.trim())) {
-      console.log('search for %s in area %s with experience %s', token, areaId, experienceId);
-      this.searchService.addSearch([token], areaId, experienceId);
+      this.searchService
+        .addSearch([token], this.selectedArea, this.selectedExperience)
+        .catch( (e:Error) => {
+          this.error.next(new QueryError(text, e));
+          return Observable.empty();
+        })
+        .subscribe();
     }
   }
 
@@ -60,5 +66,9 @@ export class StatisticsSectionComponent {
 
   onRemoveQuery(query: SearchModel) {
     this.searchService.removeSearch(query);
+  }
+
+  onDismiss() {
+    this.error.next(null);
   }
 }

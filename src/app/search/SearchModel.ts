@@ -2,6 +2,7 @@
  * Created by bocharovf on 08.06.17.
  */
 import {VacancyStats} from 'hh-stats';
+import {FilterItem} from "../filter/FilterItem";
 
 /**
  * Search result representation
@@ -17,6 +18,8 @@ export class SearchModel {
   constructor (
     public stat: VacancyStats,
     public query: string,
+    public experience: FilterItem,
+    public area: FilterItem,
     public color?: string
   ) {
     this.color = color || SearchModel.getRandomColor();
