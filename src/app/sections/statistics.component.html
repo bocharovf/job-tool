@@ -53,7 +53,7 @@
          (tagClick)="onSearch($event.text)"></div>
 
     <result-table-view
-      style="max-width: 500px; margin: 15px 0 0 0"
+      style="min-width: 500px; max-width: 800px; margin: 15px 0 0 0"
       *ngIf="hasResults | async"
       [results]="results | async">
     </result-table-view>
@@ -70,7 +70,5 @@
     </result-error>
 
   </div>
-  <!--<not-found></not-found>
-  <charts></charts>-->
 
 </section>
