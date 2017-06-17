@@ -1,28 +1,16 @@
-# Client
+# Description
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+Online tool for comparison of technologies in context of their popularity and market demand. It retrieves vacancies, parse and aggregate it. That "prepared" infromation is shown for you in convinient form of table. 
 
-## Development server
+# History 
+This is a new awesome version of [job.statistics](https://github.com/bocharovf/job.statistics) rewritten in Angular 4.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This project will have more features (see Roadmap section), new interface and design principles.
 
-## Code scaffolding
+Code related to HeadHunter API and statistics calculation was moved to separate project [hh-stats](https://github.com/bocharovf/hh-stats) and available from [NPM](https://www.npmjs.com/package/hh-stats).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Roadmap
+1. Basic search functionality with area and experience filter and text (table) results representation [19.06.17]
+2. Chart results representation using DevExtreme charts [07.17]
+3. Direct link for search results [07.17]
+4. Include GitHub language popularity in results, see [github-tool](https://github.com/bocharovf/github-tool) [08.17]
