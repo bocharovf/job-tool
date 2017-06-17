@@ -1,59 +1,59 @@
 <section id="searchSection" class="search-section">
 
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 40px 0 0 0; width: 100%">
+  <div class="search-container">
 
-    <div style="width: 50%;">
+    <div class="input-container">
 
       <search-input
         style="float: left; clear: right"
-        [words]="['robin', 'robust', 'rikon']"
         (search)="onSearch($event)">
       </search-input>
 
       <search-example
         style="float: left;"
         (onSearch)="onSearch($event)"
-        [example]="'java, c#, python'">
+        [example]="samples | async">
       </search-example>
 
     </div>
 
-    <div style="width: 100%; margin: 15px 0 0 0"></div>
+    <div class="separator-15"></div>
 
-      <filter-autocomplete
-        style="width: 200px; margin: 15px 100px 0 0"
-        [title]="'Город'"
-        [items]="areas | async"
-        [(selected)]="selectedArea"
-        (selectedChange)="onAreaSelected($event)"
-      >
-      </filter-autocomplete>
+    <filter-autocomplete
+      class="filter-margin"
+      [title]="'Город'"
+      [items]="areas | async"
+      [(selected)]="selectedArea"
+      (selectedChange)="onAreaSelected($event)">
+    </filter-autocomplete>
 
-      <filter-dropdown
-        style="width: 200px; margin: 15px 0 0 0"
-        [items]="experiences | async"
-        [(selected)]="selectedExperience"
-        [title]="'Опыт'"
-        [defaultItem]="'Любой'">
-      </filter-dropdown>
+    <div class="separator-15 display-580"></div>
 
-    <div style="width: 100%; margin: 50px 0 0 0"></div>
+    <filter-dropdown
+      class="filter"
+      [items]="experiences | async"
+      [(selected)]="selectedExperience"
+      [title]="'Опыт'"
+      [defaultItem]="'Любой'">
+    </filter-dropdown>
+
+    <div class="separator-50"></div>
 
     <search-queries
       (removeQuery)="onRemoveQuery($event)"
       [queries]="results | async">
     </search-queries>
 
-    <div style="width: 100%; margin: 15px 0 0 0"></div>
+    <div class="separator-15"></div>
 
     <div resultTagCloud
          *ngIf="!(inProgress | async) && !(hasResults | async)"
-         [words]="cloudTags"
-         [height]="300"
+         [words]="cloudTags | async"
+         [height]="250"
          (tagClick)="onSearch($event.text)"></div>
 
     <result-table-view
-      style="min-width: 500px; max-width: 800px; margin: 15px 0 0 0"
+      class="results-table"
       *ngIf="hasResults | async"
       [results]="results | async">
     </result-table-view>

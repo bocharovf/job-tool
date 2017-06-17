@@ -13,6 +13,8 @@ import { AboutSectionComponent } from './sections/about.component';
 import { StartupSectionComponent } from './sections/startup.component';
 import { StatisticsSectionComponent } from './sections/statistics.component';
 
+import { ApiService } from './api/api.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,7 @@ import { StatisticsSectionComponent } from './sections/statistics.component';
     FilterModule,
     ResultsModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

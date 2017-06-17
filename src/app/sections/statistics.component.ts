@@ -1,12 +1,12 @@
-import {Component, Query} from '@angular/core';
+import {Component} from '@angular/core';
 import {SearchService} from '../search/search.service';
-import {Observable, Subject, BehaviorSubject} from 'rxjs';
-import {ExperienceItem, AreaItem} from "hh-stats";
+import {Observable, BehaviorSubject} from 'rxjs';
 import {DictionaryService} from "../search/dictionary.service";
 import {FilterItem} from "../filter/FilterItem";
 import {SearchModel} from "../search/SearchModel";
 import {CloudTag} from "../result/CloudTag";
 import {QueryError} from "../result/QueryError";
+import {ApiService} from "../api/api.service";
 
 @Component({
     selector: 'app-statistics-section',
@@ -20,21 +20,18 @@ export class StatisticsSectionComponent {
   inProgress: Observable<boolean>;
   results: Observable<SearchModel[]>;
   hasResults: Observable<boolean>;
+  cloudTags: Observable<CloudTag[]>;
+  samples: Observable<string>;
 
   error = new BehaviorSubject<Error>(null);
 
   selectedExperience: FilterItem = null;
   selectedArea: FilterItem = null;
-  cloudTags: CloudTag[] = [
-    new CloudTag('c#', 5),
-    new CloudTag('java', 9),
-    new CloudTag('javascript', 10),
-    new CloudTag('python', 4)
-  ];
 
   constructor(
     private searchService: SearchService,
-    private dictionaryService: DictionaryService
+    private dictionaryService: DictionaryService,
+    private apiService: ApiService
   ) {
     this.experiences = this.dictionaryService.experiences;
     this.areas = this.dictionaryService.areas;
@@ -42,6 +39,12 @@ export class StatisticsSectionComponent {
     this.inProgress = this.searchService.queriesOnAir.map(amount => amount > 0);
     this.results = this.searchService.results;
     this.hasResults = this.results.map(results => results.length > 0);
+
+    this.cloudTags = apiService.cloudTags;
+    this.cloudTags.subscribe();
+
+    this.samples = apiService.samples;
+    this.samples.subscribe();
   }
 
   onSearch(text) {

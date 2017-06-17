@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output, Input, ElementRef} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {TypeaheadMatch} from "ngx-bootstrap";
-import 'rxjs/add/observable/of';
+import {ApiService} from '../api/api.service';
 
 @Component({
     selector: 'search-input',
@@ -12,26 +12,27 @@ export class SearchInputComponent {
   @Input() public words:string[];
   @Output() public search = new EventEmitter<string>();
 
-  public dataSource: Observable<any>;
-  public selected: string;
+  dataSource: Observable<string[]>;
+  selected: string;
 
-  public constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef, private apiService: ApiService) {
     this.dataSource = Observable.create(
                           (observer: any) => observer.next(this.selected)
                         ).mergeMap((token: string) =>
-                          this.getStatesAsObservable(token));
+                          apiService.autocompleteWord(token)
+                        );
   }
 
-  public onSelect(e: TypeaheadMatch): void {
+  onSelect(e: TypeaheadMatch): void {
     this.EmitSearch(this.selected);
   }
 
-  public onEnter(e: KeyboardEvent): void {
+  onEnter(e: KeyboardEvent): void {
     if (!this.isDropdownOpen())
       this.EmitSearch(this.selected);
   }
 
-  public onSearchBtnClick(e: MouseEvent) {
+  onSearchBtnClick(e: MouseEvent) {
     this.EmitSearch(this.selected);
   }
 
@@ -39,13 +40,6 @@ export class SearchInputComponent {
     if (!text.trim()) return;
     this.search.emit(text);
     this.selected = '';
-  }
-
-  private getStatesAsObservable(token: string): Observable<any> {
-    return Observable.of(
-      this.words.filter((state: string) => state.toLowerCase()
-                                                .startsWith(token.toLowerCase()))
-    );
   }
 
   /**

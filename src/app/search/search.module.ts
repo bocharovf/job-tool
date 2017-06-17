@@ -6,7 +6,8 @@ import { SearchService } from './search.service';
 import { SearchInputComponent } from './input.component';
 import { SearchExampleComponent } from './example.component';
 import { DictionaryService } from "./dictionary.service";
-import {SearchQueriesComponent} from "./queries.component";
+import { SearchQueriesComponent } from "./queries.component";
+import { ApiService } from "../api/api.service";
 
 const components = [
   SearchInputComponent, SearchExampleComponent,
@@ -20,7 +21,7 @@ const components = [
     FormsModule,
     TypeaheadModule.forRoot()
   ],
-  providers: [SearchService, DictionaryService],
+  providers: [SearchService, DictionaryService, ApiService],
   exports: components
 })
 export class SearchModule { }
