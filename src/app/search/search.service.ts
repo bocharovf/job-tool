@@ -4,7 +4,7 @@
 import {Injectable} from '@angular/core';
 import {Subject, Observable} from 'rxjs';
 import {SearchModel} from './SearchModel';
-import {HeadHunterApi, CurrencyConverter, DictCurrencyConverter} from "hh-stats";
+import {HeadHunterApi, CurrencyConverter, DictCurrencyConverter, RequestParam} from "hh-stats";
 import {FilterItem} from "../filter/FilterItem";
 
 /**
@@ -20,6 +20,21 @@ const INITIAL_RESULTS = new Array<SearchModel>();
 const USER_AGENT = 'job-tool, contact bocharovf@gmail.com';
 const TIMEOUT = 3000;
 
+/**
+ * HH Api parameter to show only vacancies with salary
+ * @type {RequestParam}
+ */
+const ONLY_WITH_SALARY = new RequestParam('only_with_salary', 'true');
+
+/**
+ * HH Api parameter to order vacancies by relevance
+ * @type {RequestParam}
+ */
+const ORDER_BY_RELEVANCE = new RequestParam('order_by', 'relevance');
+
+/**
+ * Service responsible for producing salary and popularity statistics
+ */
 @Injectable()
 export class SearchService {
 
@@ -98,7 +113,8 @@ export class SearchService {
     return this.currencyConverter
         .do(() => this.onAir.next(1))
         .flatMap(converter => {
-          let query = this.api.getVacancy(converter, keywords, areaId, experienceId);
+          let query = this.api.getVacancy(converter, keywords, areaId, experienceId,
+                                          ONLY_WITH_SALARY, ORDER_BY_RELEVANCE);
           return Observable.fromPromise(query);
         })
         .retry(2)
