@@ -10,7 +10,7 @@ import {FilterItem} from "./FilterItem";
     selector: 'filter-autocomplete',
     template: `
   <button 
-    *ngIf="!edit" 
+    *ngIf="!_edit" 
     type="button" 
     class="btn"
     [class.btn-primary]="selected"
@@ -24,7 +24,7 @@ import {FilterItem} from "./FilterItem";
   
   <input
     #input
-    *ngIf="edit"
+    *ngIf="_edit"
     type="text"
     class="form-control"
     style="width: 100%; text-align: center;"
@@ -45,7 +45,7 @@ export class AutocompleteComponent implements AfterViewChecked{
 
   @Input() selected:FilterItem;
   private dataSource: Observable<FilterItem>;
-  private edit: boolean;
+  _edit: boolean;
 
   @ViewChild('input') private el:ElementRef;
 
@@ -57,22 +57,22 @@ export class AutocompleteComponent implements AfterViewChecked{
   }
 
   onPreviewClick() {
-    this.edit = true;
+    this._edit = true;
   }
 
   onBlur() {
-    this.edit = false;
+    this._edit = false;
   }
 
   private prevEdit = false;
   ngAfterViewChecked() {
-    if (!this.prevEdit && this.edit)
+    if (!this.prevEdit && this._edit)
       this.el.nativeElement.focus();
   }
 
   onSelect(e: TypeaheadMatch): void {
     this.selectedChange.emit(e.item);
-    this.edit = false;
+    this._edit = false;
   }
 
   private getStatesAsObservable(token: string): Observable<any> {
