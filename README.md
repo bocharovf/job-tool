@@ -2,6 +2,8 @@
 
 Online tool for comparison of technologies in context of their popularity and market demand. It retrieves vacancies, parse and aggregate it. That "prepared" infromation is shown for you in convinient form of table. 
 
+Demo: [http://salary.bocharovf.ru/](http://salary.bocharovf.ru/)
+
 # History 
 This is a new awesome version of [job.statistics](https://github.com/bocharovf/job.statistics) rewritten in Angular 4.
 
