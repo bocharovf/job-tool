@@ -117,12 +117,12 @@ export class SearchService {
                                           ONLY_WITH_SALARY, ORDER_BY_RELEVANCE);
           return Observable.fromPromise(query);
         })
-        .retry(2)
         .do(stat => {
           let result = new SearchModel(stat, keywords.join(','), experience, area);
           this.newResults.next(result);
         })
-        .finally(() => this.onAir.next(-1));
+        .finally(() => this.onAir.next(-1))
+        .retry(2);
   }
 
   /**
